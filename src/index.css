@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@media screen and (max-width :768px){
+    .p-3{
+        overflow-y: scroll !important;
+    }
+}
