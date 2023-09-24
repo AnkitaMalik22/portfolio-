@@ -12,6 +12,7 @@ const projects = [
   { id: 4, title: 'Multi Step Form', skills: ['HTML', 'CSS','React'] ,deployedLink : 'https://multi-step-form-react-tan.vercel.app/', repoLink : 'https://github.com/AnkitaMalik22/multi-step-form'},
   { id: 5, title: 'Product Listing', skills: ['NodeJs', 'React'] ,deployedLink : 'https://product-listing-ankitamalik22.vercel.app/', repoLink : 'https://github.com/AnkitaMalik22/product-listing'},
   { id: 6, title: 'Hotel Surplus Food Distribution', skills: ['NodeJs', 'React'] ,deployedLink : 'https://hotelsurplusfooddistribution.us/', repoLink : 'https://github.com/AnkitaMalik22/hsfd-system'},
+  { id: 7, title: 'swipTory', skills: ['NodeJs', 'React','MongoDB'] ,deployedLink : 'https://portfolio-ankitamalik22.vercel.app/', repoLink : 'https://github.com/AnkitaMalik22/portfolio'},
 
 ];
 const boxVariant = {

@@ -44,12 +44,7 @@ const Home = () => {
           >
             Web Developer
           </motion.div>
-          <motion.div
-            className={`text-sm font-medium ${darkMode ? 'text-slate-50' : 'text-slate-400'}`}
-            {...headTextAnimation}
-          >
-            Available for freelance projects
-          </motion.div>
+        
         </div>
         <div className="flex flex-col sm:flex-row items-baseline mt-4 mb-1 pb-6">
           <div className="space-x-2 flex text-sm font-bold">
@@ -90,33 +85,13 @@ const Home = () => {
               View Projects
             </motion.button>
           </div>
-          <motion.button
-            className={`flex-none flex items-center justify-center w-9 h-9 rounded-full ${
-              darkMode ? 'text-white bg-cyan-400' : 'text-violet-600 bg-white'
-            }`}
-            type="button"
-            aria-label="Like"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.1 }}
-            style={{ backgroundColor: lightBG }}
-          >
-            <svg width="20" height="20" fill="currentColor" aria-hidden="true">
-              <motion.path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-                variants={fadeAnimation}
-              />
-            </svg>
-          </motion.button>
+      
         </div>
         <motion.p
           className={`text-sm text-justify ${darkMode ? 'text-slate-200' : 'text-slate-500'}`}
           variants={slideAnimation('up')}
         >
-          I am a web developer with a passion for creating clean and functional websites. I specialize in front-end
-          development using HTML, CSS, and JavaScript. I strive to deliver high-quality websites that provide a great
-          user experience. Let's work together on your next project!
+        A Computer Science graduate deeply passionate about web development, I am actively seeking web developer positions in the MERN stack, with the goal of advancing my skills and making meaningful contributions to impactful projects.
         </motion.p>
       </motion.div>
       <CanvasTest  />
