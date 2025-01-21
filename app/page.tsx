@@ -1,101 +1,177 @@
-import Image from "next/image";
+'use client'
+
+import { motion } from 'framer-motion'
+import { TypeAnimation } from 'react-type-animation'
+import Layout from './components/layout'
+import { useRef } from 'react'
+import { useScroll, useTransform } from 'framer-motion'
+import GlassCard from './components/glass-card'
+
+const FloatingTech = ({ tech, index }: { tech: string; index: number }) => {
+  const y = useTransform(
+    useScroll().scrollYProgress,
+    [0, 1],
+    [0, Math.random() * 100 - 50]
+  )
+
+  return (
+    <motion.div
+      className="px-4 py-2 backdrop-blur-md bg-white/10 rounded-full border border-white/20 text-cyan-300"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.1 }}
+      style={{ y }}
+      whileHover={{ scale: 1.1, boxShadow: '0 0 15px rgba(34,211,238,0.4)' }}
+    >
+      {tech}
+    </motion.div>
+  )
+}
+
+const SkillCard = ({ skill, description, index }: { skill: string; description: string; index: number }) => (
+  <GlassCard>
+    <h3 className="text-xl font-semibold text-cyan-400 mb-2">{skill}</h3>
+    <p className="text-gray-300">{description}</p>
+  </GlassCard>
+)
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const skills = [
+    { skill: "Frontend Development", description: "Expertise in React, Next.js, and modern CSS frameworks like Tailwind." },
+    { skill: "Backend Development", description: "Proficient in Node.js, Express, and database management with MongoDB." },
+    { skill: "Full Stack Integration", description: "Seamlessly connecting frontend and backend for robust web applications." },
+    { skill: "UI/UX Design", description: "Creating intuitive and visually appealing user interfaces and experiences." },
+    { skill: "API Development", description: "Designing and implementing RESTful APIs for efficient data handling." },
+    { skill: "Performance Optimization", description: "Enhancing web application speed and efficiency for better user experience." }
+  ]
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  return (
+    <Layout>
+      <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
+        <div className="relative w-full z-10">
+          <div className="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center">
+            <div className="mx-auto max-w-3xl text-center">
+              <motion.div
+                initial={{ scale: 0.5, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.8 }}
+                className="mb-8"
+              >
+                <div className="text-cyan-400 text-lg font-mono mb-4">Hello World! I'm</div>
+                <h1 className="bg-gradient-to-r from-cyan-300 via-blue-400 to-purple-500 bg-clip-text text-6xl md:text-8xl font-extrabold text-transparent pb-4">
+                  Ankita Malik
+                </h1>
+                <div className="text-2xl md:text-4xl font-bold text-gray-200 mt-4">
+                  <TypeAnimation
+                    sequence={[
+                      'Full Stack Developer',
+                      2000,
+                      'MERN Stack Expert',
+                      2000,
+                      'UI/UX Enthusiast',
+                      2000,
+                    ]}
+                    wrapper="span"
+                    repeat={Infinity}
+                  />
+                </div>
+              </motion.div>
+
+              <motion.div
+                className="flex flex-wrap gap-4 justify-center mb-8"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.5 }}
+              >
+                {['React', 'Node.js', 'MongoDB', 'Express', 'TypeScript', 'Next.js'].map((tech, index) => (
+                  <FloatingTech key={tech} tech={tech} index={index} />
+                ))}
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.8 }}
+                className="backdrop-blur-lg bg-white/10 p-6 rounded-lg border border-white/20 shadow-xl"
+              >
+                <p className="text-lg text-gray-300 leading-relaxed">
+                  Passionate about building innovative web solutions with modern technologies. 
+                  I specialize in turning complex problems into elegant, user-friendly interfaces.
+                  Let's create something amazing together!
+                </p>
+              </motion.div>
+
+              <motion.div
+                className="mt-8 flex flex-wrap gap-4 justify-center"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 1 }}
+              >
+                <motion.a
+                  href="/projects"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-full font-semibold hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-shadow"
+                >
+                  View Projects
+                </motion.a>
+                <motion.a
+                  href="/contact"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-8 py-3 border border-cyan-500 text-cyan-400 rounded-full font-semibold hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-shadow"
+                >
+                  Contact Me
+                </motion.a>
+              </motion.div>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+      </div>
+
+      <div className="container mx-auto px-4 py-32">
+        <motion.h2
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-3xl font-bold text-center text-cyan-400 mb-12"
         >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          My Skills
+        </motion.h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {skills.map((skill, index) => (
+            <SkillCard key={skill.skill} skill={skill.skill} description={skill.description} index={index} />
+          ))}
+        </div>
+      </div>
+
+      <div className="container mx-auto px-4 py-32">
+        <motion.h2
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-3xl font-bold text-center text-cyan-400 mb-8"
         >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          Special Thanks
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          className="text-center text-gray-300 mb-8"
         >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+          I'd like to express my gratitude to the following YouTubers who have inspired and educated me throughout my journey:
+        </motion.p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {['Traversy Media', 'The Net Ninja', 'Web Dev Simplified', 'Fireship', 'Academind', 'Ben Awad'].map((youtuber, index) => (
+            <GlassCard key={youtuber} className="text-center">
+              <h3 className="text-xl font-semibold text-white mb-2">{youtuber}</h3>
+              <p className="text-gray-400">Thank you for your amazing content!</p>
+            </GlassCard>
+          ))}
+        </div>
+      </div>
+    </Layout>
+  )
 }
+
